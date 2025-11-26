@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="w-full">
+    <footer id="footer"  className="w-full">
       {/* Top small gold bar */}
       <div className="w-full h-10 bg-[#DC9E38]"></div>
 

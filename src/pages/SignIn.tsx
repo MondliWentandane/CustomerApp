@@ -5,7 +5,7 @@ const SignIn = () => {
   return (
     <>
     <Navbar />
-    <div className="w-full flex justify-center py-16 bg-white px-4 md:px-8">
+    <div className="w-full flex justify-center mt-20 py-16 bg-white px-4 md:px-8">
       <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between bg-white px-6 py-8 rounded gap-6">
 
         {/* Left Image */}
@@ -52,8 +52,8 @@ const SignIn = () => {
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
 
-          <button className="w-full py-3 border rounded flex items-center justify-center gap-3 text-black">
-            Sign in with Google
+          <button className="w-full py-3 border-2 border-[#DC9E38] rounded flex items-center justify-center gap-3 text-black">
+            Sign up with Google
           </button>
         </div>
 
