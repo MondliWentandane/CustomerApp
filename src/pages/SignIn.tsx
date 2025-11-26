@@ -5,18 +5,18 @@ const SignIn = () => {
   return (
     <>
     <Navbar />
-    <div className="w-full flex justify-center mt-20 py-16 bg-white px-4 md:px-8">
-      <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between bg-white px-6 py-8 rounded gap-6">
+    <div className="w-full flex justify-center mt-20 py-8 sm:py-12 md:py-16 bg-white px-4 md:px-8">
+      <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between bg-white px-4 sm:px-6 py-6 sm:py-8 rounded gap-4 sm:gap-6">
 
         {/* Left Image */}
         <div className="hidden md:block shrink-0">
-          <img src="/left icon.png" alt="Left Icon" className="w-32 h-32 object-contain" />
+          <img src="/left icon.png" alt="Left Icon" className="w-24 md:w-28 lg:w-32 h-24 md:h-28 lg:h-32 object-contain" />
         </div>
 
         {/* Form */}
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-center mb-2 text-black">Sign In</h2>
-          <p className="text-center text-gray-600 mb-6">
+        <div className="flex-1 w-full max-w-md">
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 text-black">Sign In</h2>
+          <p className="text-center text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
             Please sign in to continue booking...
           </p>
 
@@ -59,7 +59,7 @@ const SignIn = () => {
 
         {/* Right Image */}
         <div className="hidden md:block shrink-0">
-          <img src="/right  icon.png" alt="Right Icon" className="w-32 h-32 object-contain" />
+          <img src="/right  icon.png" alt="Right Icon" className="w-24 md:w-28 lg:w-32 h-24 md:h-28 lg:h-32 object-contain" />
         </div>
 
       </div>

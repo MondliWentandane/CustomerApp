@@ -18,16 +18,16 @@ const RoomActions = () => {
   return (
     <>
       {/* Left Icons + Line */}
-      <div className="relative w-[50px] shrink-0">
+      <div className="relative w-0 sm:w-8 md:w-12 lg:w-[50px] shrink-0">
         {/* Vertical Line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 h-[1000px] border-l border-gray-300"></div>
+        <div className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 top-0 h-[1000px] border-l border-gray-300"></div>
 
         {/* Icons column */}
-        <div className="absolute right-12 transform -translate-x-1/2 top-100 -translate-y-1/2 flex flex-col items-center space-y-16 z-10">
+        <div className="absolute right-0 sm:right-6 md:right-8 lg:right-12 transform -translate-x-1/2 top-20 sm:top-32 md:top-40 lg:top-100 -translate-y-1/2 flex flex-row sm:flex-col items-center space-x-4 sm:space-x-0 sm:space-y-8 md:space-y-12 lg:space-y-16 z-10">
           {/* Heart */}
           <button
             onClick={() => setLiked(!liked)}
-            className="text-5xl cursor-pointer focus:outline-none"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl cursor-pointer focus:outline-none"
           >
             <FaHeart className={liked ? "text-red-500" : "text-gray-400"} />
           </button>
@@ -35,7 +35,7 @@ const RoomActions = () => {
           {/* Comment */}
           <button
             onClick={() => setShowCommentModal(true)}
-            className="text-5xl text-gray-400 cursor-pointer focus:outline-none"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 cursor-pointer focus:outline-none"
           >
             <FaRegComment />
           </button>
@@ -51,7 +51,7 @@ const RoomActions = () => {
       alert("Unable to copy URL.");
     }
   }}
-  className="text-5xl text-gray-400 cursor-pointer focus:outline-none"
+  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 cursor-pointer focus:outline-none"
 >
   <FaShareAlt />
 </button>
@@ -61,9 +61,9 @@ const RoomActions = () => {
 
       {/* Comment / Rating Modal */}
       {showCommentModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-white rounded-lg p-6 w-96 relative">
-            <h2 className="text-lg font-semibold mb-4">Leave a Review</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-sm sm:w-96 relative">
+            <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Leave a Review</h2>
             <div className="flex space-x-1 mb-3">
               {[1, 2, 3, 4, 5].map((i) => (
                 <FaStar

@@ -145,49 +145,49 @@ const BookingPage: React.FC = () => {
     <div className="w-full bg-gray-50">
       <Navbar />
 
-      <div className="w-full max-w-[1400px] ml-30 mt-20 py-20 flex gap-12 px-6">
+      <div className="w-full max-w-[1400px] ml-0 md:ml-8 lg:ml-16 xl:ml-30 mt-20 py-8 sm:py-12 md:py-16 lg:py-20 flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-12 px-4 sm:px-6">
         <RoomActions /> 
 
        
-        <div className="flex flex-[2.5] gap-6">
+        <div className="flex flex-col lg:flex-row flex-[2.5] gap-4 sm:gap-6">
           
           {/* Main Image */}
-          <div className="flex flex-col gap-4 w-[55%]">
+          <div className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[55%]">
             <img
           
               src={currentRoom.mainImage}
               alt={currentRoom.title}
-              className="w-full h-[500px] object-cover rounded-xl shadow-lg"
+              className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover rounded-xl shadow-lg"
             />
           </div>
 
           {/* Thumbnails */}
-          <div className="flex flex-col gap-4 w-[65%]">
+          <div className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[45%]">
             
             <img
               src={currentRoom.thumbnailTop}
               alt={`${currentRoom.title} View 3`}
-              className="w-[700px] h-60 object-cover rounded-lg shadow-md"
+              className="w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-60 object-cover rounded-lg shadow-md"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 sm:gap-3 md:gap-4">
               
               <img
                 src={currentRoom.thumbnailBottomLeft}
                 alt={`${currentRoom.title} View 1`}
-                className="w-1/2 h-[245px] object-cover rounded-lg shadow-md"
+                className="w-1/2 h-[120px] sm:h-[140px] md:h-[180px] lg:h-[245px] object-cover rounded-lg shadow-md"
               />
               
               <img
                 src={currentRoom.thumbnailBottomRight}
                 alt={`${currentRoom.title} View 2`}
-                className="w-1/2 h-[245px] object-cover rounded-lg shadow-md"
+                className="w-1/2 h-[120px] sm:h-[140px] md:h-[180px] lg:h-[245px] object-cover rounded-lg shadow-md"
               />
             </div>
           </div>
         </div>
 
         {/* Booking Form */}
-        <div className="flex flex-[1.2] ml-10 flex-col gap-8">
+        <div className="flex flex-[1.2] ml-0 lg:ml-10 flex-col gap-6 sm:gap-8">
           {/* Check-in */}
           <div className="flex flex-col w-full">
             <label className="text-sm font-medium mb-1">Check In</label>
@@ -247,15 +247,15 @@ const BookingPage: React.FC = () => {
       </div>
 
       {/* Room Title & Features */}
-      <div className="max-w-[1400px] mx-auto -mt-10 px-6">
+      <div className="max-w-[1400px] mx-auto -mt-4 sm:-mt-6 md:-mt-8 lg:-mt-10 px-4 sm:px-6">
         {/* ROOM TITLE */}
-        <p className="text-3xl font-medium text-black mb-2">{currentRoom.title}</p>
-        <p className="text-gray-700 text-sm mb-6">
+        <p className="text-2xl sm:text-2xl md:text-3xl font-medium text-black mb-2">{currentRoom.title}</p>
+        <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6">
           56 Railway Street, Annadale
         </p>
 
-        <p className="font-medium mb-3">Room Features</p>
-        <div className="flex gap-6">
+        <p className="font-medium mb-2 sm:mb-3 text-sm sm:text-base">Room Features</p>
+        <div className="flex gap-4 sm:gap-5 md:gap-6">
           <div className="flex flex-col items-center">
             <img src="/wifi.png" className="w-10 h-10 mb-1" />
             <span className="text-sm">Wi-Fi</span>
@@ -272,7 +272,7 @@ const BookingPage: React.FC = () => {
       </div>
 
       {/* Description / Policy / Ratings Section */}
-      <div className="max-w-[1400px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {/* Description */}
         <div>
           <h3 className="text-lg font-semibold mb-2 text-[#DC9E38] drop-shadow-lg">
@@ -320,10 +320,10 @@ const BookingPage: React.FC = () => {
       </div>
 
       {/* Map */}
-      <div className="max-w-[1400px] mx-auto px-6 py-16 text-center">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 text-center">
         <iframe
           src="https://www.google.com/maps?q=YOUR-HOTEL-ADDRESS&output=embed"
-          className="w-full h-[450px] rounded-lg shadow-lg border"
+          className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[450px] rounded-lg shadow-lg border"
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

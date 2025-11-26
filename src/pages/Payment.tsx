@@ -72,9 +72,9 @@ const PaymentPage = () => {
         <div className="min-h-screen bg-gray-100 flex flex-col items-center font-inter">
             {/* <Navbar /> */}
              <Navbar />
-            <div className="bg-white shadow-xl rounded-xl p-8 max-w-3xl w-full mt-30 mb-10">
+            <div className="bg-white shadow-xl rounded-xl p-4 sm:p-6 md:p-8 max-w-3xl w-full mt-20 sm:mt-24 md:mt-30 mb-6 sm:mb-8 md:mb-10 mx-4">
                 
-                <h1 className="text-2xl font-bold mb-6 text-gray-900">Payment Summary</h1>
+                <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900">Payment Summary</h1>
 
                 {/* Date & Guest Summary */}
                 <div className="space-y-2 border-b border-gray-200 pb-4 mb-4 text-gray-700">
@@ -245,17 +245,17 @@ const PaymentPage = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex space-x-4 pt-4">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 pt-4">
                         <button
                             type="button"
-                            className="flex-1 py-3 border border-gray-400 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                            className="flex-1 py-2 sm:py-3 border border-gray-400 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition text-sm sm:text-base"
                         >
                             Cancel
                         </button>
-                        <Link to="/confirmation">
+                        <Link to="/confirmation" className="flex-1">
                         <button
                             type="submit"
-                            className="flex-1 py-3 bg-[#DC9E38] w-[350px] text-black rounded-lg font-semibold hover:bg-[#c38c2f] transition"
+                            className="w-full py-2 sm:py-3 bg-[#DC9E38] text-black rounded-lg font-semibold hover:bg-[#c38c2f] transition text-sm sm:text-base"
                         >
                             Pay Now
                         </button>
