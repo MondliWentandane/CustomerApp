@@ -115,12 +115,12 @@ const Home = () => {
           )}
 
           {displayRooms.map((room, index) => {
-            const roomSlug = 'slug' in room ? room.slug : room.id;
+            const roomSlug = 'slug' in room ? room.slug : ('id' in room && typeof (room as Room).id !== 'undefined' ? String((room as Room).id) : `room-${index}`);
             const roomTitle = 'title' in room ? room.title : room.name;
             const roomImage = 'image' in room ? room.image : (room.images?.main || '/SUPERIOR.png');
             const roomDescription = 'description' in room ? room.description : `Experience comfort and elegance in our ${roomTitle}, thoughtfully designed for relaxation and peace.`;
-            const roomView = 'view' in room ? room.view : room.features?.find(f => f.toLowerCase().includes('view')) || 'City View';
-            const roomBed = 'bedType' in room ? room.bedType : room.features?.find(f => f.toLowerCase().includes('bed')) || 'King Bed / 2 Single Beds';
+            const roomView = 'view' in room ? room.view : ('features' in room && Array.isArray(room.features) ? room.features.find((f: string) => f.toLowerCase().includes('view')) : null) || 'City View';
+            const roomBed = 'bedType' in room ? room.bedType : ('features' in room && Array.isArray(room.features) ? room.features.find((f: string) => f.toLowerCase().includes('bed')) : null) || 'King Bed / 2 Single Beds';
 
             // Use room ID as key for uniqueness (room IDs are unique across all hotels)
             const uniqueKey = 'id' in room && room.id ? `room-${room.id}` : `room-${roomSlug}-${index}`;
