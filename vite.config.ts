@@ -28,10 +28,12 @@ export default defineConfig({
           });
           proxy.on('proxyRes', (proxyRes, req, _res) => {
             const status = proxyRes.statusCode;
-            const emoji = status >= 200 && status < 300 ? '✅' : status === 404 ? '❌' : '⚠️';
-            console.log(`${emoji} Response:`, status, req.url);
-            if (status === 404) {
-              console.log('💡 404 - Check if the backend route exists:', req.url);
+            if (status) {
+              const emoji = status >= 200 && status < 300 ? '✅' : status === 404 ? '❌' : '⚠️';
+              console.log(`${emoji} Response:`, status, req.url);
+              if (status === 404) {
+                console.log('💡 404 - Check if the backend route exists:', req.url);
+              }
             }
           });
         },

@@ -115,15 +115,18 @@ const Home = () => {
           )}
 
           {displayRooms.map((room, index) => {
-            const roomSlug = 'slug' in room ? room.slug : ('id' in room && typeof (room as Room).id !== 'undefined' ? String((room as Room).id) : `room-${index}`);
-            const roomTitle = 'title' in room ? room.title : room.name;
-            const roomImage = 'image' in room ? room.image : (room.images?.main || '/SUPERIOR.png');
-            const roomDescription = 'description' in room ? room.description : `Experience comfort and elegance in our ${roomTitle}, thoughtfully designed for relaxation and peace.`;
-            const roomView = 'view' in room ? room.view : ('features' in room && Array.isArray(room.features) ? room.features.find((f: string) => f.toLowerCase().includes('view')) : null) || 'City View';
-            const roomBed = 'bedType' in room ? room.bedType : ('features' in room && Array.isArray(room.features) ? room.features.find((f: string) => f.toLowerCase().includes('bed')) : null) || 'King Bed / 2 Single Beds';
+            // Type guard to check if it's a Room type
+            const isRoom = (r: any): r is Room => 'id' in r && 'name' in r;
+            
+            const roomSlug = isRoom(room) ? room.slug : ('slug' in room ? room.slug : String(index));
+            const roomTitle = isRoom(room) ? room.name : ('title' in room ? room.title : 'Room');
+            const roomImage = isRoom(room) ? (room.images?.main || '/SUPERIOR.png') : ('image' in room ? room.image : '/SUPERIOR.png');
+            const roomDescription = isRoom(room) ? room.description : `Experience comfort and elegance in our ${roomTitle}, thoughtfully designed for relaxation and peace.`;
+            const roomView = isRoom(room) ? (room.view || room.features?.find((f: string) => f.toLowerCase().includes('view')) || 'City View') : 'City View';
+            const roomBed = isRoom(room) ? (room.bedType || room.features?.find((f: string) => f.toLowerCase().includes('bed')) || 'King Bed / 2 Single Beds') : 'King Bed / 2 Single Beds';
 
             // Use room ID as key for uniqueness (room IDs are unique across all hotels)
-            const uniqueKey = 'id' in room && room.id ? `room-${room.id}` : `room-${roomSlug}-${index}`;
+            const uniqueKey = isRoom(room) && room.id ? `room-${room.id}` : `room-${roomSlug}-${index}`;
 
             return (
               <div
