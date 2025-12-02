@@ -1,0 +1,101 @@
+{
+  "rooms": [
+    {
+      "name": "Superior Room",
+      "slug": "superior",
+      "description": "Experience comfort and elegance in our Superior Room, thoughtfully designed for relaxation and simplicity for guests seeking a peaceful retreat.",
+      "pricePerNight": 1000,
+      "images": {
+        "main": "/SUPERIOR.png",
+        "thumbnails": ["/SUP3.png", "/SUP1.png", "/SUP2.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub"],
+      "amenities": ["City View"],
+      "maxGuests": 3,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    },
+    {
+      "name": "Deluxe Room",
+      "slug": "deluxe",
+      "description": "Our Deluxe Room offers an elevated sense of luxury with its spacious layout and premium finishes, perfect for extended stays.",
+      "pricePerNight": 1200,
+      "images": {
+        "main": "/delux.png",
+        "thumbnails": ["/deluxe1.png", "/deluxe2.png", "/deluxe3.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub"],
+      "amenities": ["City View"],
+      "maxGuests": 3,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    },
+    {
+      "name": "Junior Suites",
+      "slug": "junior-suites",
+      "description": "Step into refined luxury with our Junior Suites, offering a semi-separate living space and enhanced amenities for a truly comfortable stay.",
+      "pricePerNight": 1500,
+      "images": {
+        "main": "/junior.png",
+        "thumbnails": ["/JUNIOR1.png", "/JUNIOR2.png", "/JUNIOR3.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub", "Living Area"],
+      "amenities": ["City View", "Separate Living Space"],
+      "maxGuests": 4,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    },
+    {
+      "name": "Executive Suites",
+      "slug": "executive-suites",
+      "description": "Crafted for both business and leisure, the Executive Suites offers comfort with a professional touch and exclusive access to executive lounge privileges.",
+      "pricePerNight": 1800,
+      "images": {
+        "main": "/executive.png",
+        "thumbnails": ["/executive1.png", "/executive2.png", "/executive3.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub", "Work Desk", "Executive Lounge Access"],
+      "amenities": ["City View", "Business Amenities"],
+      "maxGuests": 4,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    },
+    {
+      "name": "Royal Suites",
+      "slug": "royal-suites",
+      "description": "The Royal Suites offers expansive elegance with exclusive amenities and luxurious décor, representing the ultimate in lavish accommodation.",
+      "pricePerNight": 2500,
+      "images": {
+        "main": "/royal.png",
+        "thumbnails": ["/ROYAL3.png", "/ROYAL2.png", "/Royal1.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub", "Separate Living Room", "Dining Area", "Premium Amenities"],
+      "amenities": ["City View", "Premium Service"],
+      "maxGuests": 5,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    },
+    {
+      "name": "Family Rooms",
+      "slug": "family-rooms",
+      "description": "The Family Rooms provides generous space, comfort, and kid-friendly amenities for memorable stays with the whole family.",
+      "pricePerNight": 1400,
+      "images": {
+        "main": "/family.png",
+        "thumbnails": ["/family1.png", "/family2.png", "/family3.png"]
+      },
+      "features": ["Wi-Fi", "King Bed", "Bath-tub", "Kid-Friendly", "Extra Space"],
+      "amenities": ["City View", "Family Amenities"],
+      "maxGuests": 5,
+      "maxRooms": 3,
+      "view": "City View",
+      "bedType": "King Bed / 2 Single Beds"
+    }
+  ]
+}
+

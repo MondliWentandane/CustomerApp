@@ -1,3 +1,65 @@
+# Hotel App - Customer Frontend
+
+A React + TypeScript + Vite application for hotel customers to book rooms and manage their reservations.
+
+## Setup
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. **Start your backend** (in a separate terminal):
+   ```bash
+   # In your backend directory
+   npm start
+   ```
+   Make sure it's running on `http://localhost:3000`
+
+3. Start the frontend development server:
+```bash
+npm run dev
+```
+
+The frontend will automatically connect to your local backend via the Vite proxy.
+
+## Local Backend Connection
+
+The app is configured to connect to your local backend running on `http://localhost:3000` through a Vite proxy.
+
+### How It Works
+
+- Frontend runs on: `http://localhost:5174`
+- Backend should run on: `http://localhost:3000`
+- All `/api/*` requests are automatically proxied to your local backend
+
+### Environment Variables (Optional)
+
+- `VITE_API_URL`: Only needed if you want to override the default localhost URL (defaults to `http://localhost:3000/api`)
+- `VITE_SUPABASE_URL`: (Optional) Supabase project URL for client-side features
+- `VITE_SUPABASE_ANON_KEY`: (Optional) Supabase anonymous key for client-side features
+
+The API client is configured in `src/lib/api.ts` and automatically:
+- Includes authentication tokens from localStorage
+- Handles CORS with credentials
+- Manages token expiration and redirects to login
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

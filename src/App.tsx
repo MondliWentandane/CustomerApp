@@ -9,6 +9,8 @@ import ProfilePage from "./pages/Profile";
 import Payment from "./pages/Payment";
 import ConfirmationPage from "./pages/Confirmation";
 import EditProfile from "./pages/EditProfile";
+import PayPalCallback from "./pages/PayPalCallback";
+
 function App() {
   return (
     <>
@@ -20,6 +22,7 @@ function App() {
         <Route path="/booking/:roomName" element={<Booking />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/callback" element={<PayPalCallback />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>

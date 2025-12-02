@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import RoomActions from "../components/RoomActions";
 import { Link } from "react-router-dom";
+import { roomService } from "../services/roomService";
+import type { Room } from "../services/roomService";
+import { bookingService } from "../services/bookingService";
+import { authService } from "../services/authService";
 
 interface RoomDetails {
   title: string;
@@ -85,8 +89,15 @@ const ROOM_DATA: RoomDataMap = {
 
 
 const BookingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { roomName: urlRoomName } = useParams<BookingParams>();
+  const [room, setRoom] = useState<Room | null>(null);
+  const [loading, setLoading] = useState(true);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const [selectedRooms, setSelectedRooms] = useState(1);
+  const [selectedGuests, setSelectedGuests] = useState(1);
+  const [bookingLoading, setBookingLoading] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -97,48 +108,118 @@ const BookingPage: React.FC = () => {
   ];
 
   const guestOptions = [
-    { value: "1 Person", label: "1 Person" },
-    { value: "2 People", label: "2 People" },
-    { value: "3 People", label: "3 People" },
+    { value: 1, label: "1 Person" },
+    { value: 2, label: "2 People" },
+    { value: 3, label: "3 People" },
   ];
 
-  const { roomName: urlRoomName } = useParams<BookingParams>();
-  
-  const normalizedRoomName: RoomSlug | undefined = urlRoomName 
-    ? (urlRoomName.toLowerCase().replace(/\s+/g, '-') as RoomSlug) 
-    : undefined;
-
-  const isRoomFound = normalizedRoomName && normalizedRoomName in ROOM_DATA;
-  const fallbackData = ROOM_DATA.superior;
-  
-  const currentRoom: RoomDetails = isRoomFound 
-    ? ROOM_DATA[normalizedRoomName as RoomSlug] 
-    : fallbackData;
-  
-
-  const [mainImage, setMainImage] = useState<string>(currentRoom.mainImage);
-
-
   useEffect(() => {
+    const fetchRoom = async () => {
+      if (!urlRoomName) return;
+      
+      try {
+        const roomData = await roomService.getRoomBySlug(urlRoomName);
+        setRoom(roomData);
+      } catch (err: any) {
+        // Fallback to hardcoded data
+        const normalizedRoomName = urlRoomName.toLowerCase().replace(/\s+/g, '-') as RoomSlug;
+        if (normalizedRoomName in ROOM_DATA) {
+          const fallbackRoom = ROOM_DATA[normalizedRoomName];
+          // Convert to Room format
+          setRoom({
+            id: normalizedRoomName,
+            name: fallbackRoom.title,
+            slug: normalizedRoomName,
+            description: fallbackRoom.descriptionTemplate.replace('**{roomName}**', fallbackRoom.title),
+            pricePerNight: 1000,
+            images: {
+              main: fallbackRoom.mainImage,
+              thumbnails: [fallbackRoom.thumbnailTop, fallbackRoom.thumbnailBottomLeft, fallbackRoom.thumbnailBottomRight],
+            },
+            features: ['Wi-Fi', 'King Bed', 'Bath-tub'],
+            amenities: [],
+            maxGuests: 3,
+            maxRooms: 3,
+          });
+        }
+        console.error("Error fetching room:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    setMainImage(currentRoom.mainImage); 
-  }, [currentRoom]);
+    fetchRoom();
+  }, [urlRoomName]);
 
+  const handleBookNow = async () => {
+    if (!room || !checkIn || !checkOut) {
+      alert("Please fill in all booking details");
+      return;
+    }
 
-  const description = currentRoom.descriptionTemplate.replace(
-    '**{roomName}**',
-    `**${currentRoom.title}**`
-  );
-  
-  if (urlRoomName && !isRoomFound) {
-      return (
-          <div className="flex items-center justify-center min-h-screen bg-gray-100">
-              <h1 className="text-3xl font-bold text-red-600">
-                  Room Not Found: "{urlRoomName}"
-              </h1>
-          </div>
-      );
+    if (!authService.isAuthenticated()) {
+      navigate("/signin");
+      return;
+    }
+
+    setBookingLoading(true);
+    try {
+      const booking = await bookingService.createBooking({
+        roomId: room.id,
+        checkIn,
+        checkOut,
+        numberOfRooms: selectedRooms,
+        numberOfGuests: selectedGuests,
+        hotelId: room.hotelId, // Include hotel_id if available
+      });
+      
+      // Store booking in sessionStorage for payment page
+      sessionStorage.setItem('currentBooking', JSON.stringify(booking.booking));
+      navigate("/payment");
+    } catch (err: any) {
+      console.error("Booking error:", err);
+      const errorMessage = err.response?.data?.message 
+        || err.response?.data?.error 
+        || err.message 
+        || "Failed to create booking. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setBookingLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="w-full bg-gray-50">
+        <Navbar />
+        <div className="flex items-center justify-center min-h-screen">
+          <p className="text-xl">Loading room details...</p>
+        </div>
+      </div>
+    );
   }
+
+  if (!room) {
+    return (
+      <div className="w-full bg-gray-50">
+        <Navbar />
+        <div className="flex items-center justify-center min-h-screen">
+          <h1 className="text-3xl font-bold text-red-600">
+            Room Not Found: "{urlRoomName}"
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  const currentRoom = {
+    title: room.name,
+    mainImage: room.images.main,
+    thumbnailTop: room.images.thumbnails[0] || room.images.main,
+    thumbnailBottomLeft: room.images.thumbnails[1] || room.images.main,
+    thumbnailBottomRight: room.images.thumbnails[2] || room.images.main,
+    description: room.description,
+  };
 
 
   return (
@@ -224,6 +305,8 @@ const BookingPage: React.FC = () => {
                 placeholder="00 Rooms"
                 classNamePrefix="select"
                 className="w-full bg-black/10 rounded-lg"
+                onChange={(option) => setSelectedRooms(option?.value || 1)}
+                defaultValue={roomOptions[0]}
               />
             </div>
             <div className="flex-1">
@@ -233,16 +316,20 @@ const BookingPage: React.FC = () => {
                 placeholder="00 Guests"
                 classNamePrefix="select"
                 className="w-full bg-black/10 rounded-lg"
+                onChange={(option) => setSelectedGuests(option?.value || 1)}
+                defaultValue={guestOptions[0]}
               />
             </div>
           </div>
 
           {/* Book Now */}
-          <Link to="/payment">
-          <button className="w-full mt-6 bg-[#DC9E38] text-black py-4 rounded-lg font-semibold">
-            Book Now
+          <button 
+            onClick={handleBookNow}
+            disabled={bookingLoading || !checkIn || !checkOut}
+            className="w-full mt-6 bg-[#DC9E38] text-black py-4 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {bookingLoading ? "Processing..." : "Book Now"}
           </button>
-          </Link>
         </div>
       </div>
 
@@ -256,18 +343,18 @@ const BookingPage: React.FC = () => {
 
         <p className="font-medium mb-2 sm:mb-3 text-sm sm:text-base">Room Features</p>
         <div className="flex gap-4 sm:gap-5 md:gap-6">
-          <div className="flex flex-col items-center">
-            <img src="/wifi.png" className="w-10 h-10 mb-1" />
-            <span className="text-sm">Wi-Fi</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <img src="/bed.png" className="w-10 h-10 mb-1" />
-            <span className="text-sm">King Bed</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <img src="/bathtub.png" className="w-10 h-10 mb-1" />
-            <span className="text-sm">Bath-tub</span>
-          </div>
+          {room.features.slice(0, 3).map((feature, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <img 
+                src={feature.toLowerCase().includes('wifi') ? "/wifi.png" : 
+                     feature.toLowerCase().includes('bed') ? "/bed.png" : 
+                     feature.toLowerCase().includes('bath') ? "/bathtub.png" : "/wifi.png"} 
+                className="w-10 h-10 mb-1" 
+                alt={feature}
+              />
+              <span className="text-sm">{feature}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -281,7 +368,7 @@ const BookingPage: React.FC = () => {
           {/* DYNAMIC DESCRIPTION */}
           <p 
             className="text-gray-700 text-sm"
-            dangerouslySetInnerHTML={{ __html: description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}
+            dangerouslySetInnerHTML={{ __html: currentRoom.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}
           />
         </div>
 

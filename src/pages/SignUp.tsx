@@ -1,7 +1,65 @@
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { authService } from "../services/authService";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await authService.signUp(formData);
+      navigate("/home");
+    } catch (err: any) {
+      console.error("Sign up error:", err);
+      
+      // Better error messages
+      if (err.response?.status === 404) {
+        setError("Sign up route not found. Please check if the backend is deployed correctly.");
+      } else if (err.response?.status === 500) {
+        const errorData = err.response?.data;
+        if (errorData?.error === 'Database error' || errorData?.error === 'Signup failed') {
+          if (errorData?.details?.includes('Tenant or user not found')) {
+            setError("Database connection issue. Please verify Supabase credentials are correct in Render.");
+          } else {
+            setError("Database connection error. Please contact support or try again later.");
+          }
+        } else {
+          setError("Server error. Please try again later.");
+        }
+      } else if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Failed to sign up. Please check your connection and try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -20,39 +78,66 @@ const SignUp = () => {
             Please sign up or click sign in to continue booking...
           </p>
 
-          <label className="block text-black mb-1">Full Name:</label>
-          <input
-            type="text"
-            placeholder="Enter your full name"
-            className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
-          />
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
 
-          <label className="block text-black mb-1">Email Address:</label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
-          />
+          <form onSubmit={handleSubmit}>
+            <label className="block text-black mb-1">Full Name:</label>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Enter your full name"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
+            />
 
-          <label className="block text-black mb-1">Phone Number:</label>
-          <input
-            type="text"
-            placeholder="Enter your phone number"
-            className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
-          />
+            <label className="block text-black mb-1">Email Address:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
+            />
 
-          <label className="block text-black mb-1">Password:</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            className="w-full px-4 py-3 border rounded mb-6 outline-none text-black"
-          />
+            <label className="block text-black mb-1">Phone Number:</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Enter your phone number"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
+            />
 
-          <Link to="/signin">
-          <button className="w-full bg-[#DC9E38] text-black py-3 rounded font-semibold">
-            Sign Up
-          </button>
-          </Link>
+            <label className="block text-black mb-1">Password:</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              minLength={6}
+              className="w-full px-4 py-3 border rounded mb-6 outline-none text-black"
+            />
+
+            <button 
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#DC9E38] text-black py-3 rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Signing up..." : "Sign Up"}
+            </button>
+          </form>
 
           <p className="text-center mt-4 text-black">
             Already have an account?{" "}

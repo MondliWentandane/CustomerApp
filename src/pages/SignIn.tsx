@@ -1,7 +1,47 @@
 
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { authService } from "../services/authService";
+
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await authService.signIn({ email, password });
+      navigate("/home");
+    } catch (err: any) {
+      console.error("Sign in error:", err);
+      
+      // Better error messages
+      if (err.response?.status === 500) {
+        const errorData = err.response?.data;
+        if (errorData?.error === 'Database error') {
+          setError("Database connection error. Please contact support or try again later.");
+        } else {
+          setError("Server error. Please try again later.");
+        }
+      } else if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("Failed to sign in. Please check your credentials.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
     <Navbar />
@@ -20,24 +60,41 @@ const SignIn = () => {
             Please sign in to continue booking...
           </p>
 
-          <label className="block text-black mb-1">Email Address:</label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
-          />
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
 
-          <label className="block text-black mb-1">Password:</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            className="w-full px-4 py-3 border rounded mb-6 outline-none text-black"
-          />
-          <Link to="/home">
-          <button className="w-full bg-[#DC9E38] text-black py-3 rounded font-semibold">
-            Sign In
-          </button>
-          </Link>
+          <form onSubmit={handleSubmit}>
+            <label className="block text-black mb-1">Email Address:</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 border rounded mb-4 outline-none text-black"
+            />
+
+            <label className="block text-black mb-1">Password:</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-3 border rounded mb-6 outline-none text-black"
+            />
+            
+            <button 
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#DC9E38] text-black py-3 rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
 
           <p className="text-center mt-4 text-black">
             Don't have an account?{" "}
