@@ -6,7 +6,7 @@ const Footer = () => {
 
       {/* Main footer block */}
       <div className="w-full bg-[#403D36] text-white py-6 sm:py-8 md:py-10 lg:py-12 px-4 sm:px-6">
-        <div className="mx-auto gap-4 sm:gap-8 md:gap-12 lg:gap-20 xl:gap-60 flex flex-col md:flex-row ml-0 md:ml-8 lg:ml-12 xl:ml-20">
+        <div className="max-w-7xl mx-auto gap-4 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-20 flex flex-col md:flex-row">
 
           {/* Column 1*/}
         
@@ -79,7 +79,7 @@ const Footer = () => {
         </div>
 
 {/* Message Input Section */}
-<div className="max-w-3xl mx-auto my-4 sm:my-6 md:my-8 mt-[-100px] sm:mt-[-120px] md:mt-[-140px] lg:mt-[-150px] mr-0 sm:mr-4 md:mr-8 lg:mr-12 xl:mr-90 px-4 sm:px-6">
+<div className="max-w-3xl mx-auto my-4 sm:my-6 md:my-8 mt-[-100px] sm:mt-[-120px] md:mt-[-140px] lg:mt-[-150px] px-4 sm:px-6 mr-12">
   <p className="mb-2 text-white text-sm sm:text-base">Message:</p>
   <div className="flex flex-col sm:flex-row">
     <input

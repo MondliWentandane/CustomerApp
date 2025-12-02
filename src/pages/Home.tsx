@@ -156,7 +156,7 @@ const Home = () => {
                   </p>
 
                   <Link to={`/booking/${roomSlug}`}> 
-                  <button className="bg-[#DC9E38] text-black px-8 sm:px-12 md:px-50 py-2 sm:py-2.5 md:py-3 rounded font-semibold text-sm sm:text-base hover:bg-[#c38c2f] transition w-full sm:w-auto">
+                  <button className="bg-[#DC9E38] text-black px-8 lg:py-3 lg:px-32 sm:px-12 md:px-50 py-2 sm:py-2.5 md:py-3 rounded font-semibold text-sm sm:text-base hover:bg-[#c38c2f] transition w-full sm:w-auto">
                     View More Details
                   </button>
                   </Link>

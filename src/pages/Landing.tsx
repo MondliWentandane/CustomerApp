@@ -1,9 +1,20 @@
 import BookingBar from "../components/BookingBar";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleBookNowClick = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/signin');
+    } else {
+      navigate('/home');
+    }
+  };
+
   return (
     <div className="w-full">
 
@@ -127,7 +138,7 @@ const Landing = () => {
                 <div className="p-4 text-center">
                   <h3 className="text-lg font-semibold">Superior Rooms</h3>
                   <p className="text-sm text-gray-700 mt-1">A step above standard, but below deluxe.</p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -140,7 +151,7 @@ const Landing = () => {
                 <div className="p-4 text-center">
                   <h3 className="text-lg font-semibold">Deluxe Rooms</h3>
                   <p className="text-sm text-gray-700 mt-1">Better furniture, bigger space, nicer view</p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -155,7 +166,7 @@ const Landing = () => {
                   <p className="text-sm text-gray-700 mt-1">
                     For business travelers. Includes a work desk, lounge access.
                   </p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -168,7 +179,7 @@ const Landing = () => {
                 <div className="p-4 text-center">
                   <h3 className="text-lg font-semibold">Junior Suites</h3>
                   <p className="text-sm text-gray-700 mt-1">Larger room with a small living area</p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -183,7 +194,7 @@ const Landing = () => {
                   <p className="text-sm text-gray-700 mt-1">
                     Includes 2 rooms, private office, dining area.
                   </p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -198,7 +209,7 @@ const Landing = () => {
                   <p className="text-sm text-gray-700 mt-1">
                     Perfect for families with children. Designed for groups.
                   </p>
-                  <button className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
+                  <button onClick={handleBookNowClick} className="mt-4 w-full bg-[#CCBEB1] text-black py-2 rounded-md">Book Now</button>
                 </div>
               </div>
 
@@ -208,7 +219,7 @@ const Landing = () => {
       </div>
 
       {/* FACILITIES SECTION */}
-      <div id="facilities" className="w-full max-w-[1500px] h-auto min-h-[400px] sm:min-h-[500px] md:min-h-[600px] bg-[#403D36] py-8 sm:py-12 md:py-16 ml-0 md:ml-4 lg:ml-8 xl:ml-50 mt-20 sm:mt-30 md:mt-40 lg:mt-50 mx-auto px-4 sm:px-6">
+      <div id="facilities" className="w-full max-w-7xl h-auto min-h-[400px] sm:min-h-[500px]  md:min-h-[600px] bg-[#403D36] py-8 sm:py-12 md:py-16 mt-20 sm:mt-30 md:mt-40 lg:mt-50 mx-auto px-4 sm:px-6">
 
         <h2 className="text-white text-2xl sm:text-2xl md:text-3xl font-semibold text-center">
           Hotel Facilities

@@ -20,14 +20,14 @@ const RoomActions = () => {
       {/* Left Icons + Line */}
       <div className="relative w-0 sm:w-8 md:w-12 lg:w-[50px] shrink-0">
         {/* Vertical Line */}
-        <div className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 top-0 h-[1000px] border-l border-gray-300"></div>
+        <div className="hidden sm:block absolute left-8 transform -translate-x-1/2 top-0 h-[1000px] border-l border-gray-300"></div>
 
         {/* Icons column */}
-        <div className="absolute right-0 sm:right-6 md:right-8 lg:right-12 transform -translate-x-1/2 top-20 sm:top-32 md:top-40 lg:top-100 -translate-y-1/2 flex flex-row sm:flex-col items-center space-x-4 sm:space-x-0 sm:space-y-8 md:space-y-12 lg:space-y-16 z-10">
+        <div className="absolute right-0 xl:mr-4 sm:right-6 md:right-8 lg:right-3 transform -translate-x-1/2 top-20 sm:top-32 md:top-40 lg:top-100 -translate-y-1/2 flex flex-row sm:flex-col items-center space-x-4 sm:space-x-0 sm:space-y-8 md:space-y-12 lg:space-y-16 z-10">
           {/* Heart */}
           <button
             onClick={() => setLiked(!liked)}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl cursor-pointer focus:outline-none"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl cursor-pointer focus:outline-none"
           >
             <FaHeart className={liked ? "text-red-500" : "text-gray-400"} />
           </button>
@@ -35,7 +35,7 @@ const RoomActions = () => {
           {/* Comment */}
           <button
             onClick={() => setShowCommentModal(true)}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 cursor-pointer focus:outline-none"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl text-gray-400 cursor-pointer focus:outline-none"
           >
             <FaRegComment />
           </button>
@@ -51,7 +51,7 @@ const RoomActions = () => {
       alert("Unable to copy URL.");
     }
   }}
-  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 cursor-pointer focus:outline-none"
+  className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl text-gray-400 cursor-pointer focus:outline-none"
 >
   <FaShareAlt />
 </button>

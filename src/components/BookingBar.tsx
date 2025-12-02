@@ -23,13 +23,14 @@ const BookingBar = () => {
   ];
 
   return (
-    <div className="relative -mt-8 sm:-mt-12 md:-mt-16 z-20 ml-0 sm:ml-4 md:ml-8 lg:ml-16 xl:ml-70">
-      {/* Top Gold Bar */}
-      <div className="w-full sm:w-[90%] md:w-[95%] lg:w-[1300px] h-2 sm:h-3 md:h-4 bg-[#DC9E38]"></div>
+    <div className="relative -mt-8 sm:-mt-12 md:-mt-16 z-20 w-full flex justify-center px-4 sm:px-6 md:px-8">
+      <div className="w-full max-w-6xl">
+        {/* Top Gold Bar */}
+        <div className="w-full h-2 sm:h-3 md:h-4 bg-[#DC9E38]"></div>
 
-      {/* Booking Bar */}
-      <div className="w-full sm:w-[90%] md:w-[95%] lg:w-[1300px] bg-[#403D36] py-4 sm:py-6 md:py-8 flex justify-center px-2 sm:px-4">
-        <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-7 text-white items-center">
+        {/* Booking Bar */}
+        <div className="w-full bg-[#403D36] py-4 sm:py-6 md:py-8 px-2 sm:px-4">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 text-white items-center">
 {/* CHECK IN */}
 <div className="flex flex-col gap-1 sm:gap-2 border-r-0 sm:border-r border-white pr-0 sm:pr-2 md:pr-4">
   <label className="text-xs sm:text-sm mb-1 ml-1">Check In</label>
@@ -143,6 +144,7 @@ const BookingBar = () => {
             </button>
           </div>
 
+          </div>
         </div>
       </div>
     </div>

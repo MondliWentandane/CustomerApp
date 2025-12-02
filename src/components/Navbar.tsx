@@ -17,52 +17,45 @@ const Navbar = () => {
 
       {/* Links */}
       <div className="flex items-center space-x-2 sm:space-x-4 md:space-x-6 ml-auto">
-        <ul className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 text-center text-sm md:text-base lg:text-lg">
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+        <ul className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 text-center text-xs md:text-sm lg:text-sm">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <Link smooth to="/#hero">
-              <img src="/home.png" className="w-5 h-5 mb-2 ml-3" />
               Home
             </Link>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
              <Link smooth to="/#about">
-              <img src="/about us.png" className="w-6 h-6 mb-1 ml-7" />
               About Us
             </Link>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <a href="/home">
-              <img src="/room-suite.png" className="w-6 h-6 mb-1 ml-13" />
               Rooms & Suites
             </a>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <Link smooth to="/#facilities">
-              <img src="/facilities.png" className="w-6 h-6 mb-1 ml-5" />
               Facilities
             </Link>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <Link smooth to="/#location">
-              <img src="/location.png" className="w-6 h-6 mb-1 ml-6" />
                Location
             </Link>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <Link smooth to="/#footer">
-              <img src="/contact.png" className="w-6 h-6 mb-1 ml-6" />
               Contact
             </Link>
           </li>
 
-          <li className="flex flex-col items-center hover:text-[#DC9E38] cursor-pointer">
+          <li className="hover:text-[#DC9E38] cursor-pointer">
             <a href="/profile">
-              <img src="/user.png" className="w-6 h-6 mb-1 ml-3" />
               Profile
             </a>
           </li>

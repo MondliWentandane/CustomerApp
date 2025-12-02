@@ -170,7 +170,7 @@ const BookingPage: React.FC = () => {
         checkOut,
         numberOfRooms: selectedRooms,
         numberOfGuests: selectedGuests,
-        hotelId: room.hotelId, // Include hotel_id if available
+        hotelId: room.hotelId, 
       });
       
       // Store booking in sessionStorage for payment page
@@ -226,7 +226,7 @@ const BookingPage: React.FC = () => {
     <div className="w-full bg-gray-50">
       <Navbar />
 
-      <div className="w-full max-w-[1400px] ml-0 md:ml-8 lg:ml-16 xl:ml-30 mt-20 py-8 sm:py-12 md:py-16 lg:py-20 flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-12 px-4 sm:px-6">
+      <div className="w-full max-w-[1400px] ml-0 md:ml-8 lg:ml-16 xl:ml-0 mt-20 py-8 sm:py-12 md:py-16 lg:py-20 flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-12 px-4 sm:px-6">
         <RoomActions /> 
 
        
@@ -248,7 +248,7 @@ const BookingPage: React.FC = () => {
             <img
               src={currentRoom.thumbnailTop}
               alt={`${currentRoom.title} View 3`}
-              className="w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-60 object-cover rounded-lg shadow-md"
+              className="w-full h-[120px] sm:h-[140px] md:h-40 lg:h-60 object-cover rounded-lg shadow-md"
             />
             <div className="flex gap-2 sm:gap-3 md:gap-4">
               
@@ -334,7 +334,7 @@ const BookingPage: React.FC = () => {
       </div>
 
       {/* Room Title & Features */}
-      <div className="max-w-[1400px] mx-auto -mt-4 sm:-mt-6 md:-mt-8 lg:-mt-10 px-4 sm:px-6">
+      <div className="max-w-[1400px] mx-auto -mt-4 sm:-mt-6 lg:ml-24 md:-mt-8 lg:-mt-10 px-4 sm:px-6">
         {/* ROOM TITLE */}
         <p className="text-2xl sm:text-2xl md:text-3xl font-medium text-black mb-2">{currentRoom.title}</p>
         <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6">
@@ -359,7 +359,7 @@ const BookingPage: React.FC = () => {
       </div>
 
       {/* Description / Policy / Ratings Section */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      <div className="max-w-[1400px] mx-auto px-4 lg:ml-24 sm:px-6 py-8 sm:py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {/* Description */}
         <div>
           <h3 className="text-lg font-semibold mb-2 text-[#DC9E38] drop-shadow-lg">

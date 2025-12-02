@@ -116,7 +116,7 @@ const ProfilePage = () => {
 
           <button
             onClick={() => navigate("/edit-profile")}
-            className="w-full sm:w-auto px-4 sm:px-5 py-2 bg-[#DC9E38] text-black rounded-lg hover:bg-[#c78e2d] text-sm sm:text-base"
+            className="w-full sm:w-auto px-12 mr-8 py-2 bg-[#DC9E38] text-black rounded-lg hover:bg-[#c78e2d] text-sm sm:text-base"
           >
             Edit
           </button>
@@ -219,7 +219,7 @@ const ProfilePage = () => {
         {/* LOGOUT BUTTON */}
         <button
           onClick={handleLogout}
-          className="w-full sm:w-auto max-w-xs py-2 sm:py-3 bg-[#DC9E38] ml-0 sm:ml-auto text-black rounded-lg hover:bg-[#c78e2d] text-sm sm:text-base"
+          className="w-full sm:w-auto px-16 py-2 bg-[#DC9E38] text-black rounded-lg hover:bg-[#c78e2d] text-sm sm:text-base"
         >
           Logout
         </button>
